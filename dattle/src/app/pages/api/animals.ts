@@ -9,8 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break;
     case "POST":
       const newAnimal = req.body;
-      const [id] = await createAnimal(newAnimal);
-      res.status(201).json({ id });
+      const [newAnimalId] = await createAnimal(newAnimal);
+      res.status(201).json({ newAnimalId });
       break;
     case "PUT":
       const { id, ...data } = req.body;

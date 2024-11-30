@@ -1,18 +1,11 @@
-import knex, { Knex } from "knex";
-import dotenv from "dotenv";
+import knex from "knex";
+import config from "../../Knexfile";
+import { configDotenv } from "dotenv";
 
-dotenv.config();
+configDotenv();
 
-const dbConfig: Knex.Config = {
-  client: "pg",
-  connection: {
-    host: process.env.DB_HOST || "localhost",
-    user: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASSWORD || "your_password",
-    database: process.env.DB_NAME || "your_database",
-  },
-};
+const enviroment = process.env.NODE_ENV || "development";
 
-const db = knex(dbConfig);
+const knexInstance = knex(config[enviroment]);
 
-export default db;
+export default knexInstance;

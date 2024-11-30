@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 const AnimalForm = () => {
@@ -22,19 +23,18 @@ const AnimalForm = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      const result = await response.json();
-      if (result.success) {
-        alert("Animal created successfully!");
-      } else {
-        alert("Error creating animal.");
+  
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
       }
+  
+      const result = await response.json();
+      console.log("Respuesta del servidor:", result);
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Failed to submit form.");
+      console.error("Error al enviar el formulario:", error);
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <div>
