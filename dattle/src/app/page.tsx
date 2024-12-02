@@ -1,17 +1,44 @@
-import AnimalForm from "@/components/animalForm";
+"use client"
+
+import { useState } from 'react'
+import RegisterHeat from '@/components/registerHeat'
+import RegisterService from '@/components/registerService'
+import Search from '@/components/search'
 
 
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState('registerHeat')
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <AnimalForm/>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-      </footer>
+    <div className="min-h-screen bg-white text-black p-8">
+      <h1 className="text-3xl font-bold mb-8">Dattle Management System</h1>
+      <div className="mb-6">
+        <button
+          onClick={() => setActiveTab('registerHeat')}
+          className={`px-4 py-2 mr-2 ${activeTab === 'registerHeat' ? 'bg-black text-white' : 'bg-gray-200'}`}
+        >
+          Register Heat
+        </button>
+        <button
+          onClick={() => setActiveTab('registerService')}
+          className={`px-4 py-2 mr-2 ${activeTab === 'registerService' ? 'bg-black text-white' : 'bg-gray-200'}`}
+        >
+          Register Service
+        </button>
+        <button
+          onClick={() => setActiveTab('search')}
+          className={`px-4 py-2 ${activeTab === 'search' ? 'bg-black text-white' : 'bg-gray-200'}`}
+        >
+          Search
+        </button>
+      </div>
+      <div className="border border-gray-300 p-6">
+        {activeTab === 'registerHeat' && <RegisterHeat />}
+        {activeTab === 'registerService' && <RegisterService />}
+        {activeTab === 'search' && <Search />}
+      </div>
     </div>
-  );
+  )
 }
+

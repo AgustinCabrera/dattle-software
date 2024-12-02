@@ -12,6 +12,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Gender {
+  male
+  female
+}
 model Animal {
   id             Int       @id @default(autoincrement())
   identification String

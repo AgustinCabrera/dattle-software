@@ -1,31 +1,45 @@
-import knex from "../lib/knex";
+import { PrismaClient , Gender  } from "@prisma/client";
 
-interface Animal {
-  id: number; // Primary Key
+const prisma = new PrismaClient();
+
+// Define la interfaz TypeScript para los datos del animal
+export interface Animal {
+  id: string; // Primary Key
   identification: string; // Unique identifier for the animal
   birthDate: Date;
   breed: string;
-  gender: "male" | "female"; // Enum-like constraint
-}
+  gender: Gender;
 
-const tableName = "Animal";
-
+// Obtener todos los animales
 export const getAllAnimals = async (): Promise<Animal[]> => {
-  return knex<Animal>(tableName).select("*");
+  return await prisma.animal.findMany();
 };
 
-export const getAnimalById = async (id: number): Promise<Animal | undefined> => {
-  return knex<Animal>(tableName).where({ id }).first();
+// Obtener un animal por ID
+export const getAnimalById = async (id: number): Promise<Animal | null> => {
+  return await prisma.animal.findUnique({
+    where: { id },
+  });
 };
 
-export const createAnimal = async (animal: Omit<Animal, "id">): Promise<number[]> => {
-  return knex<Animal>(tableName).insert(animal).returning("id");
+// Crear un nuevo animal
+export const createAnimal = async (animal: Omit<Animal, "id">): Promise<Animal> => {
+  return await prisma.animal.create({
+    data: animal,
+  });
 };
 
-export const updateAnimal = async (id: number, data: Partial<Omit<Animal, "id">>): Promise<number> => {
-  return knex<Animal>(tableName).where({ id }).update(data);
+// Actualizar un animal por ID
+export const updateAnimal = async (id: number, data: Partial<Omit<Animal, "id">>): Promise<Animal | null> => {
+  return await prisma.animal.update({
+    where: { id },
+    data,
+  });
 };
 
-export const deleteAnimal = async (id: number): Promise<number> => {
-  return knex<Animal>(tableName).where({ id }).del();
+// Eliminar un animal por ID
+export const deleteAnimal = async (id: number): Promise<Animal | null> => {
+  return await prisma.animal.delete({
+    where: { id },
+  });
 };
