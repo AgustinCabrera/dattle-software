@@ -29,6 +29,7 @@ model Animal {
 model Event {
   id       Int      @id @default(autoincrement())
   animalId Int
+  name  String
   date     DateTime
   type     String
   animal   Animal   @relation(fields: [animalId], references: [id])
