@@ -1,27 +1,32 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { NextResponse } from 'next/server'
+import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
-    const { identification, birthDate, breed, gender } = req.body;
-    try {
-      const newAnimal = await prisma.animal.create({
-        data: {
-          identification,
-          birthDate: new Date(birthDate),
-          breed,
-          gender,
-        },
-      });
-      res.status(201).json({ success: true, data: newAnimal });
-    } catch (error) {
-      console.error("Error creating animal:", error);
-      res.status(500).json({ success: false, message: "Error creating animal" });
-    }
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+export async function GET(request: Request) {
+  try {
+    const animals = await prisma.animal.findMany()
+    return NextResponse.json(animals)
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch animals' }, { status: 500 })
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
+    const animal = await prisma.animal.create({
+      data: {
+        tag: body.tag,
+        name: body.name,
+        breed: body.breed,
+        birthDate: new Date(body.birthDate),
+        gender: body.gender,
+      },
+    })
+    return NextResponse.json(animal, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to create animal' }, { status: 500 })
+  }
+}
+

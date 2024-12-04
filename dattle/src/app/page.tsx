@@ -1,44 +1,26 @@
-"use client"
-
-import { useState } from 'react'
-import RegisterHeat from '@/components/registerHeat'
-import RegisterService from '@/components/registerService'
-import Search from '@/components/search'
-
-
+import { LoginForm } from "@/components/login-form"
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('registerHeat')
-
   return (
-    <div className="min-h-screen bg-white text-black p-8">
-      <h1 className="text-3xl font-bold mb-8">Dattle Management System</h1>
-      <div className="mb-6">
-        <button
-          onClick={() => setActiveTab('registerHeat')}
-          className={`px-4 py-2 mr-2 ${activeTab === 'registerHeat' ? 'bg-black text-white' : 'bg-gray-200'}`}
-        >
-          Register Heat
-        </button>
-        <button
-          onClick={() => setActiveTab('registerService')}
-          className={`px-4 py-2 mr-2 ${activeTab === 'registerService' ? 'bg-black text-white' : 'bg-gray-200'}`}
-        >
-          Register Service
-        </button>
-        <button
-          onClick={() => setActiveTab('search')}
-          className={`px-4 py-2 ${activeTab === 'search' ? 'bg-black text-white' : 'bg-gray-200'}`}
-        >
-          Search
-        </button>
+    <main className="min-h-screen flex items-center justify-center bg-white p-4">
+      <div className="w-full max-w-md space-y-8">
+        <div className="flex flex-col items-center">
+          <div className="w-32 h-32 relative mb-8">
+            <div className="rounded-full border-2 border-black p-4">
+              <img
+                src="/cattle-logo.svg"
+                alt="Cattle Software Logo"
+                className="w-full h-full"
+              />
+            </div>
+          </div>
+          <h1 className="text-2xl font-bold text-center text-gray-900">
+            CATTLE SOFTWARE
+          </h1>
+        </div>
+        <LoginForm />
       </div>
-      <div className="border border-gray-300 p-6">
-        {activeTab === 'registerHeat' && <RegisterHeat />}
-        {activeTab === 'registerService' && <RegisterService />}
-        {activeTab === 'search' && <Search />}
-      </div>
-    </div>
+    </main>
   )
 }
 
