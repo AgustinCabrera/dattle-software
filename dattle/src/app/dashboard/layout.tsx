@@ -1,5 +1,5 @@
-import { BottomNav } from "../../components/bottom-nav"
-import { MainNav } from "../../components/main-nav"
+import { MainNav } from "./main-nav"
+import { DashboardNav } from "./nav"
 
 export default function DashboardLayout({
   children,
@@ -7,12 +7,12 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="flex">
+    <div className="flex min-h-screen">
+      <DashboardNav />
+      <div className="flex-1">
         <MainNav />
-        <main className="flex-1 p-4">{children}</main>
+        <main className="p-8">{children}</main>
       </div>
-      <BottomNav />
     </div>
   )
 }
