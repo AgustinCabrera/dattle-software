@@ -19,10 +19,10 @@ export async function POST(request: Request) {
     const body = await request.json()
     const event = await prisma.event.create({
       data: {
-        type: body.type,
+        name: body.name,
         date: new Date(body.date),
-        description: body.description,
         animalId: body.animalId,
+        type: body.type,
       },
     })
     return NextResponse.json(event, { status: 201 })
@@ -30,4 +30,5 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to create event' }, { status: 500 })
   }
 }
+
 

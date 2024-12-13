@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import { useState } from 'react'
-
 import Search from './Search'
 import RegisterHeat from './RegisterHeat'
 import RegisterService from './RegisterService'

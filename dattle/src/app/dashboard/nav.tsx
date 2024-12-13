@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { MilkIcon as Cow, Calendar, Heart, Baby, Stethoscope, LayoutDashboard } from 'lucide-react'
+import { MilkIcon as Cow, Heart, Baby, Stethoscope, LayoutDashboard } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
@@ -39,7 +39,7 @@ export function DashboardNav() {
   return (
     <nav className="flex flex-col w-64 border-r bg-gray-50/40">
       <div className="p-6">
-        <h1 className="text-xl font-bold">Cattle Manager</h1>
+        <h1 className="text-xl font-bold">Administrar Tambo</h1>
       </div>
       <div className="flex-1 px-4 space-y-2">
         {routes.map((route) => (

@@ -47,11 +47,11 @@ export function LoginForm() {
               required
             />
           </div>
-          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+          <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-600 text-white">
             Iniciar sesión
           </Button>
           <div className="text-center text-sm">
-            <Link href="/register" className="text-blue-600 hover:underline">
+            <Link href="/register" className="text-black-600 hover:underline">
               ¿Olvidaste tu contraseña? Registrarse
             </Link>
           </div>
