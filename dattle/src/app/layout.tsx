@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans"; // import font
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 import "./globals.css";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,9 +18,11 @@ export default function RootLayout({
   return (
     // add font to className, also add antialiased and dark mode
     <html lang="en" className={`${GeistSans.className} antialiased dark:bg-gray-950 `}>
-      <div>
-      </div>
-      <body>{children}</body>
+      <body>
+        <Theme>
+          {children}
+        </Theme>
+        </body>
     </html>
   );
 }
