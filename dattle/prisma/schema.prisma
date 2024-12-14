@@ -17,23 +17,40 @@ enum Gender {
   male
   female
 }
+model User {
+  id        String   @id @default(uuid()) // Primary Key
+  email     String   @unique
+  password  String
+  name      String
+  animals   Animal[] // One-to-many relationship with animals
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Animal {
-  id             Int       @id @default(autoincrement())
-  identification String
-  birthDate      DateTime
-  breed          String
-  gender         String
-  events         Event[]
+  id        String   @id @default(uuid()) // Primary Key
+  tag       String   @unique // Unique identifier for the animal
+  species   String   
+  breed     String?  
+  birthDate DateTime?
+  ownerId   String   // Foreign Key for User
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  events    Event[]  // One-to-many relationship with events
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Event {
-  id       Int      @id @default(autoincrement())
-  animalId Int
-  name  String
-  date     DateTime
-  type     EventType
-  animal   Animal   @relation(fields: [animalId], references: [id])
+  id        String   @id @default(uuid()) // Primary Key
+  type      String   
+  date      DateTime
+  description String?
+  animalId  String   // Foreign Key for Animal
+  animal    Animal   @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
 
 enum EventType{
   CELO
