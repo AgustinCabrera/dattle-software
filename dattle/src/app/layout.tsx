@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans"; // import font
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import "./globals.css";
@@ -17,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     // add font to className, also add antialiased and dark mode
-    <html lang="en" className={`${GeistSans.className} antialiased dark:bg-gray-950 `}>
+    <html >
       <body>
         <Theme>
           {children}
